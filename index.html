@@ -3,40 +3,460 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMR Robot - Homepage</title>
+
+    <meta name="description"
+          content="AMR Warehouse Robot - Autonomous navigation, path planning, obstacle avoidance, live tracking and data monitoring.">
+
+    <title>AMR Warehouse Robot</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header>
-        <h1>AMR Warehouse Robot</h1>
-        <nav>
-            <a href="live-tracking.html">Live Tracking</a>
-            <a href="progress.html">Progress Updates</a>
-            <a href="data-logs.html">Data Logs</a>
-        </nav>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+
+        <div class="header-container">
+
+            <div class="logo">
+                <h1>AMR Warehouse Robot</h1>
+                <span>Autonomous Mobile Robot System</span>
+            </div>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="index.html" class="active">Home</a>
+                <a href="live-tracking.html">Live Tracking</a>
+                <a href="progress.html">Progress Updates</a>
+                <a href="data-logs.html">Data Logs</a>
+            </nav>
+
+        </div>
+
     </header>
 
+
+    <!-- ================= MAIN CONTENT ================= -->
     <main>
-        <h2>Welcome to the AMR Warehouse Robot</h2>
-        <p>This website showcases the development, tracking, and data logging of an autonomous mobile robot (AMR).</p>
-        <section id="overview">
-            <h2>Overview of AMR Robot</h2>
-            <p>The AMR Robot is an autonomous mobile system capable of real-time navigation, obstacle avoidance, and live tracking.</p>
 
-            <h3>Key Features</h3>
-            <ul>
-                <li>✔ Autonomous Navigation</li>
-                <li>✔ Obstacle Avoidance</li>
-                <li>✔ Path Planning & Live Tracking</li>
-                <li>✔ Data Logging & Remote Monitoring</li>
-            </ul>
+        <!-- HERO SECTION -->
+        <section class="hero">
 
-            <h3>How It Works</h3>
-            <p>The AMR collects data from sensors, calculates the best path, avoids obstacles, and transmits live tracking data to the web interface.</p>
-            <p>And it picks up loads from the Raw Load area, navigates safely to the destination, and unloads at the assigned location.</p>
+            <div class="hero-content">
 
-            <button onclick="location.href='live-tracking.html'">View Live Tracking</button>
+                <span class="hero-label">AUTONOMOUS WAREHOUSE SYSTEM</span>
+
+                <h2>
+                    AMR Warehouse<br>
+                    Robot
+                </h2>
+
+                <p>
+                    An autonomous mobile robot designed for warehouse
+                    material transportation, path planning, obstacle
+                    avoidance and real-time monitoring.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="primary-btn"
+                        onclick="location.href='live-tracking.html'">
+                        View Live Tracking
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="location.href='progress.html'">
+                        View Project Progress
+                    </button>
+
+                </div>
+
+            </div>
+
         </section>
+
+
+        <!-- ================= PROJECT OVERVIEW ================= -->
+        <section id="overview" class="content-section">
+
+            <div class="section-heading">
+                <span>01</span>
+                <h2>Project Overview</h2>
+            </div>
+
+            <p class="section-intro">
+                The AMR Warehouse Robot is an autonomous robotic platform
+                developed to transport materials between designated
+                warehouse locations while navigating through a predefined
+                environment.
+            </p>
+
+            <p>
+                The system combines sensors, motor control, path planning
+                and wireless communication to enable the robot to move
+                between warehouse locations and provide real-time
+                information through a web-based monitoring interface.
+            </p>
+
+        </section>
+
+
+        <!-- ================= KEY FEATURES ================= -->
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>02</span>
+                <h2>Key Features</h2>
+            </div>
+
+            <div class="feature-grid">
+
+                <article class="feature-card">
+
+                    <div class="feature-number">01</div>
+
+                    <h3>Autonomous Navigation</h3>
+
+                    <p>
+                        Navigates between designated warehouse locations
+                        according to the generated path.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">02</div>
+
+                    <h3>Path Planning</h3>
+
+                    <p>
+                        Generates a grid-based navigation path between
+                        selected warehouse locations.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">03</div>
+
+                    <h3>Obstacle Detection</h3>
+
+                    <p>
+                        Uses onboard sensors to detect obstacles during
+                        robot movement.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">04</div>
+
+                    <h3>Live Tracking</h3>
+
+                    <p>
+                        Displays robot position, movement distance and
+                        operating status through the web interface.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">05</div>
+
+                    <h3>Wireless Communication</h3>
+
+                    <p>
+                        Exchanges navigation commands and robot status
+                        information with the web interface.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">06</div>
+
+                    <h3>Data Monitoring</h3>
+
+                    <p>
+                        Provides project progress and robot-related data
+                        through the monitoring pages.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= WORKING PRINCIPLE ================= -->
+        <section class="content-section working-section">
+
+            <div class="section-heading">
+                <span>03</span>
+                <h2>How the System Works</h2>
+            </div>
+
+            <div class="workflow">
+
+                <div class="workflow-step">
+
+                    <div class="step-number">1</div>
+
+                    <h3>Select Location</h3>
+
+                    <p>
+                        A warehouse starting point and destination are
+                        selected through the web interface.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-arrow">→</div>
+
+
+                <div class="workflow-step">
+
+                    <div class="step-number">2</div>
+
+                    <h3>Generate Path</h3>
+
+                    <p>
+                        The navigation system calculates a path through
+                        the warehouse grid.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-arrow">→</div>
+
+
+                <div class="workflow-step">
+
+                    <div class="step-number">3</div>
+
+                    <h3>Send Commands</h3>
+
+                    <p>
+                        Direction and distance commands are transmitted
+                        to the robot.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-arrow">→</div>
+
+
+                <div class="workflow-step">
+
+                    <div class="step-number">4</div>
+
+                    <h3>Robot Movement</h3>
+
+                    <p>
+                        The AMR follows the generated route while
+                        monitoring its movement and surroundings.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-arrow">→</div>
+
+
+                <div class="workflow-step">
+
+                    <div class="step-number">5</div>
+
+                    <h3>Live Monitoring</h3>
+
+                    <p>
+                        Robot position and operating status are displayed
+                        on the live tracking interface.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= WAREHOUSE OPERATIONS ================= -->
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>04</span>
+                <h2>Warehouse Operation</h2>
+            </div>
+
+            <div class="operation-layout">
+
+                <div class="operation-text">
+
+                    <h3>Material Transportation</h3>
+
+                    <p>
+                        The AMR is designed to collect material from the
+                        Raw Load area and transport it to a selected
+                        unloading location such as UN 1 or UN 2.
+                    </p>
+
+                    <p>
+                        The robot follows the generated navigation path
+                        while its movement is monitored through the
+                        live tracking interface.
+                    </p>
+
+                </div>
+
+
+                <div class="operation-locations">
+
+                    <div class="location-card raw-load">
+                        <span>START</span>
+                        <strong>Raw Load</strong>
+                        <small>Material Pickup</small>
+                    </div>
+
+                    <div class="location-arrow">→</div>
+
+                    <div class="location-card destination">
+                        <span>DESTINATION</span>
+                        <strong>UN 1 / UN 2</strong>
+                        <small>Material Unloading</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= WEBSITE MODULES ================= -->
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>05</span>
+                <h2>System Interface</h2>
+            </div>
+
+            <div class="interface-grid">
+
+                <a href="live-tracking.html" class="interface-card">
+
+                    <span class="interface-icon">01</span>
+
+                    <h3>Live Tracking</h3>
+
+                    <p>
+                        Monitor robot position, path, distance and
+                        operating status in real time.
+                    </p>
+
+                    <span class="interface-link">
+                        Open Tracking →
+                    </span>
+
+                </a>
+
+
+                <a href="progress.html" class="interface-card">
+
+                    <span class="interface-icon">02</span>
+
+                    <h3>Progress Updates</h3>
+
+                    <p>
+                        Follow the development and implementation progress
+                        of the AMR project.
+                    </p>
+
+                    <span class="interface-link">
+                        View Progress →
+                    </span>
+
+                </a>
+
+
+                <a href="data-logs.html" class="interface-card">
+
+                    <span class="interface-icon">03</span>
+
+                    <h3>Data Logs</h3>
+
+                    <p>
+                        Access recorded information related to robot
+                        operation and testing.
+                    </p>
+
+                    <span class="interface-link">
+                        View Data →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CALL TO ACTION ================= -->
+        <section class="cta-section">
+
+            <div>
+
+                <span class="hero-label">AMR MONITORING SYSTEM</span>
+
+                <h2>Monitor the Robot in Real Time</h2>
+
+                <p>
+                    Access the live warehouse map and monitor the robot's
+                    navigation and movement.
+                </p>
+
+            </div>
+
+            <button
+                class="primary-btn"
+                onclick="location.href='live-tracking.html'">
+                Open Live Tracking
+            </button>
+
+        </section>
+
     </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+
+        <p>
+            © 2026 AMR Warehouse Robot
+        </p>
+
+        <p>
+            Autonomous Mobile Robot • Warehouse Navigation • Live Monitoring
+        </p>
+
+    </footer>
+
+
 </body>
 </html>
