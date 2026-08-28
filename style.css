@@ -1,8 +1,12 @@
 /* =========================================================
-   AMR WAREHOUSE ROBOT - MAIN STYLESHEET
+   AMR WAREHOUSE ROBOT
+   MAIN STYLESHEET
    ========================================================= */
 
-/* ---------- Global ---------- */
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
 
 * {
     box-sizing: border-box;
@@ -13,11 +17,18 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background: #f4f6f8;
+
     color: #1f2933;
+
     line-height: 1.6;
 }
 
@@ -29,28 +40,54 @@ button {
     font-family: inherit;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 
 /* =========================================================
    HEADER
    ========================================================= */
 
 .site-header {
-    background: linear-gradient(135deg, #047af8, #0350a2);
+    background:
+        linear-gradient(
+            135deg,
+            #047af8,
+            #0350a2
+        );
+
     color: white;
+
     padding: 18px 30px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.15);
+
+    position: relative;
+
+    z-index: 1000;
 }
 
 .header-container {
     max-width: 1250px;
+
     margin: auto;
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     gap: 30px;
 }
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo {
     text-align: left;
@@ -58,43 +95,66 @@ button {
 
 .logo h1 {
     margin: 0;
+
     font-size: 25px;
+
     font-weight: 700;
+
+    line-height: 1.2;
 }
 
 .logo span {
     display: block;
-    margin-top: 2px;
+
+    margin-top: 4px;
+
     font-size: 13px;
+
     opacity: 0.85;
 }
 
 
-/* ---------- Navigation ---------- */
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 .main-nav {
     display: flex;
+
     align-items: center;
+
+    justify-content: center;
+
     gap: 5px;
 }
 
 .main-nav a {
     color: white;
+
     padding: 10px 15px;
+
     border-radius: 6px;
 
     font-size: 15px;
+
     font-weight: 600;
 
-    transition: all 0.25s ease;
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
 }
 
 .main-nav a:hover {
-    background: rgba(255, 255, 255, 0.16);
+    background:
+        rgba(255, 255, 255, 0.16);
 }
 
 .main-nav a.active {
-    background: rgba(255, 255, 255, 0.22);
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    box-shadow:
+        inset 0 -2px 0 rgba(255, 255, 255, 0.8);
 }
 
 
@@ -106,30 +166,73 @@ button {
     min-height: 520px;
 
     display: flex;
+
     align-items: center;
+
+    color: white;
 
     background:
         linear-gradient(
-            rgba(3, 80, 162, 0.92),
-            rgba(4, 122, 248, 0.88)
+            135deg,
+            rgba(3, 80, 162, 0.97),
+            rgba(4, 122, 248, 0.91)
         );
 
-    color: white;
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Decorative grid */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        50px 50px;
+
+    pointer-events: none;
 }
 
 .hero-content {
     width: 100%;
+
     max-width: 1100px;
+
     margin: auto;
+
     padding: 80px 30px;
+
     text-align: left;
+
+    position: relative;
+
+    z-index: 1;
 }
 
 .hero-label {
     display: inline-block;
 
     font-size: 12px;
+
     font-weight: 700;
+
     letter-spacing: 2px;
 
     margin-bottom: 15px;
@@ -140,7 +243,9 @@ button {
 .hero h2 {
     margin: 0 0 20px;
 
-    font-size: clamp(42px, 6vw, 72px);
+    font-size:
+        clamp(42px, 6vw, 72px);
+
     line-height: 1.05;
 
     font-weight: 800;
@@ -150,57 +255,74 @@ button {
     max-width: 720px;
 
     font-size: 19px;
+
     line-height: 1.7;
 
-    margin-bottom: 30px;
+    margin: 0 0 30px;
 
     opacity: 0.95;
 }
 
 
 /* =========================================================
-   BUTTONS
+   HERO BUTTONS
    ========================================================= */
 
 .hero-buttons {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 12px;
 }
 
 .primary-btn,
 .secondary-btn {
+    display: inline-block;
+
     padding: 13px 22px;
 
     border-radius: 6px;
+
     border: 2px solid transparent;
 
     font-size: 15px;
+
     font-weight: 700;
 
     cursor: pointer;
 
-    transition: all 0.25s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
 }
 
 .primary-btn {
-    background: #ffffff;
+    background: white;
+
     color: #0350a2;
 }
 
 .primary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 .secondary-btn {
     background: transparent;
+
     color: white;
-    border-color: rgba(255, 255, 255, 0.7);
+
+    border-color:
+        rgba(255, 255, 255, 0.7);
 }
 
 .secondary-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background:
+        rgba(255, 255, 255, 0.12);
 }
 
 
@@ -210,13 +332,17 @@ button {
 
 .content-section {
     max-width: 1150px;
+
     margin: auto;
+
     padding: 70px 25px;
 }
 
 .section-heading {
     display: flex;
+
     align-items: center;
+
     gap: 15px;
 
     margin-bottom: 25px;
@@ -224,21 +350,32 @@ button {
 
 .section-heading span {
     color: #007bff;
+
     font-size: 14px;
+
     font-weight: 800;
+
     letter-spacing: 1px;
 }
 
 .section-heading h2 {
     margin: 0;
+
     font-size: 32px;
+
+    line-height: 1.2;
+
     color: #17202a;
 }
 
 .section-intro {
-    font-size: 19px;
-    font-weight: 500;
     max-width: 900px;
+
+    font-size: 19px;
+
+    font-weight: 500;
+
+    color: #4b5563;
 }
 
 .content-section > p {
@@ -289,6 +426,7 @@ button {
     color: #007bff;
 
     font-size: 13px;
+
     font-weight: 800;
 
     letter-spacing: 1px;
@@ -300,6 +438,7 @@ button {
     margin: 0 0 10px;
 
     font-size: 20px;
+
     color: #17202a;
 }
 
@@ -307,6 +446,7 @@ button {
     margin: 0;
 
     color: #5f6b76;
+
     font-size: 15px;
 }
 
@@ -321,6 +461,7 @@ button {
 
 .workflow {
     display: flex;
+
     align-items: stretch;
 
     gap: 10px;
@@ -340,6 +481,9 @@ button {
     border: 1px solid #e0e4e8;
 
     text-align: center;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.04);
 }
 
 .step-number {
@@ -349,12 +493,15 @@ button {
     margin: 0 auto 15px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border-radius: 50%;
 
     background: #007bff;
+
     color: white;
 
     font-weight: bold;
@@ -362,6 +509,7 @@ button {
 
 .workflow-step h3 {
     font-size: 17px;
+
     margin: 0 0 8px;
 }
 
@@ -369,6 +517,7 @@ button {
     margin: 0;
 
     font-size: 14px;
+
     color: #65717c;
 }
 
@@ -376,11 +525,13 @@ button {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     color: #007bff;
 
     font-size: 25px;
+
     font-weight: bold;
 }
 
@@ -424,12 +575,15 @@ button {
 }
 
 
-/* ---------- Location flow ---------- */
+/* =========================================================
+   LOCATION FLOW
+   ========================================================= */
 
 .operation-locations {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     gap: 15px;
@@ -456,6 +610,7 @@ button {
     display: block;
 
     font-size: 11px;
+
     font-weight: 800;
 
     letter-spacing: 1px;
@@ -495,7 +650,9 @@ button {
 
 .location-arrow {
     font-size: 30px;
+
     color: #007bff;
+
     font-weight: bold;
 }
 
@@ -546,6 +703,7 @@ button {
     color: #007bff;
 
     font-size: 13px;
+
     font-weight: 800;
 
     margin-bottom: 15px;
@@ -569,12 +727,13 @@ button {
     color: #007bff;
 
     font-size: 14px;
+
     font-weight: 700;
 }
 
 
 /* =========================================================
-   CALL TO ACTION
+   CTA
    ========================================================= */
 
 .cta-section {
@@ -587,19 +746,24 @@ button {
     display: flex;
 
     justify-content: space-between;
+
     align-items: center;
 
     gap: 30px;
 
     border-radius: 12px;
 
-    background: linear-gradient(
-        135deg,
-        #0350a2,
-        #047af8
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #0350a2,
+            #047af8
+        );
 
     color: white;
+
+    box-shadow:
+        0 8px 25px rgba(3, 80, 162, 0.18);
 }
 
 .cta-section .hero-label {
@@ -622,7 +786,7 @@ button {
 
 
 /* =========================================================
-   LIVE TRACKING / MAP
+   LIVE TRACKING
    ========================================================= */
 
 .tracking-info {
@@ -630,28 +794,35 @@ button {
 
     margin: 20px auto;
 
-    padding: 20px;
+    padding: 22px 25px;
 
     background: white;
 
     border-radius: 10px;
 
+    border: 1px solid #e1e5e9;
+
     box-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.08);
+        0 3px 12px rgba(0, 0, 0, 0.07);
 }
 
 .tracking-info p {
     margin: 8px 0;
 }
 
+#status {
+    font-weight: 700;
+}
 
-/* ---------- Map Holder ---------- */
+
+/* =========================================================
+   MAP
+   ========================================================= */
 
 .map-holder {
     width: min(95%, 1000px);
-    height: 600px;
 
-    border: 3px solid #333;
+    height: 600px;
 
     margin: 20px auto;
 
@@ -659,18 +830,28 @@ button {
 
     background: white;
 
-    overflow: auto;
+    border: 3px solid #333;
 
     border-radius: 8px;
+
+    overflow: auto;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .map-container {
     width: 1500px;
+
     height: 1000px;
 
     position: absolute;
 
-    background-color: #ddd;
+    top: 0;
+
+    left: 0;
+
+    background-color: #dfe3e6;
 
     background-image:
         linear-gradient(
@@ -683,20 +864,26 @@ button {
             transparent 1px
         );
 
-    background-size: 50px 50px;
+    background-size:
+        50px 50px;
 }
 
 
-/* ---------- Warehouse blocks ---------- */
+/* =========================================================
+   WAREHOUSE BLOCKS
+   ========================================================= */
 
 .block {
     width: 180px;
+
     height: 120px;
 
     position: absolute;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
@@ -709,9 +896,12 @@ button {
 
     cursor: pointer;
 
+    user-select: none;
+
     transition:
         transform 0.25s ease,
-        box-shadow 0.25s ease;
+        box-shadow 0.25s ease,
+        outline 0.25s ease;
 }
 
 .block:hover {
@@ -722,7 +912,8 @@ button {
 }
 
 .block.selected {
-    outline: 5px solid #007bff;
+    outline:
+        5px solid #007bff;
 
     box-shadow:
         0 0 20px rgba(0, 123, 255, 0.6);
@@ -730,26 +921,32 @@ button {
 
 .red-block {
     background: #dc3545;
+
     color: white;
 }
 
 .yellow-block {
     background: #ffc107;
+
     color: #111;
 }
 
 .blue-block {
     background: #0069d9;
+
     color: white;
 }
 
 
-/* ---------- Path canvas ---------- */
+/* =========================================================
+   PATH CANVAS
+   ========================================================= */
 
 #pathCanvas {
     position: absolute;
 
     top: 0;
+
     left: 0;
 
     pointer-events: none;
@@ -774,24 +971,34 @@ button {
 
 .zoom-controls button {
     width: 45px;
+
     height: 40px;
 
     padding: 0;
 
     font-size: 22px;
+
     font-weight: bold;
 
     background: #007bff;
+
     color: white;
 
     border: none;
+
     border-radius: 6px;
 
     cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 .zoom-controls button:hover {
     background: #0056b3;
+
+    transform: translateY(-1px);
 }
 
 
@@ -813,15 +1020,21 @@ button {
     padding: 12px 18px;
 
     background: #007bff;
+
     color: white;
 
     border: none;
+
     border-radius: 6px;
 
     font-size: 15px;
+
     font-weight: bold;
 
     cursor: pointer;
+
+    transition:
+        background 0.2s ease;
 }
 
 .dropdown button:hover {
@@ -834,9 +1047,10 @@ button {
     position: absolute;
 
     top: 100%;
+
     left: 0;
 
-    min-width: 180px;
+    min-width: 190px;
 
     background: white;
 
@@ -860,10 +1074,15 @@ button {
     text-align: left;
 
     font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .dropdown-content a:hover {
     background: #f1f3f5;
+
     color: #007bff;
 }
 
@@ -888,22 +1107,54 @@ button {
     border-radius: 6px;
 
     font-size: 15px;
+
     font-weight: bold;
 
     cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 .reset-btn:hover {
     background: #218838;
+
+    transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   CHARTS / DATA LOGS
+   DATA LOGS / CHARTS
    ========================================================= */
+
+.chart-container {
+    width: 100%;
+
+    max-width: 1000px;
+
+    height: 400px;
+
+    margin: 25px auto;
+
+    padding: 10px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    border: 1px solid #e1e5e9;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Compatibility with old chart */
 
 #chart_div {
     width: 95%;
+
     max-width: 900px;
 
     height: 500px;
@@ -920,23 +1171,155 @@ button {
         0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
+
+/* =========================================================
+   PROGRESS LOG
+   ========================================================= */
+
 .progress-log {
     max-width: 1000px;
 
     background: white;
 
-    padding: 22px;
+    padding: 25px;
 
     margin: 15px auto;
 
     border-left: 5px solid #007bff;
 
-    border-radius: 6px;
+    border-radius: 7px;
 
     box-shadow:
         0 2px 10px rgba(0, 0, 0, 0.08);
 
     text-align: left;
+}
+
+.progress-log h3 {
+    margin-top: 0;
+
+    color: #17202a;
+}
+
+.progress-log p {
+    color: #5f6b76;
+}
+
+
+/* =========================================================
+   PROGRESS TIMELINE
+   ========================================================= */
+
+.progress-timeline {
+    max-width: 950px;
+
+    margin: 35px auto;
+
+    position: relative;
+}
+
+
+/* Vertical line */
+
+.progress-timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 20px;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 2px;
+
+    background: #d7dde3;
+}
+
+
+/* Timeline card */
+
+.progress-timeline .progress-log {
+    position: relative;
+
+    margin:
+        0 0 25px 55px;
+
+    padding:
+        25px 30px;
+
+    border-left: 4px solid #007bff;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.progress-timeline .progress-log:hover {
+    transform: translateX(4px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Timeline dot */
+
+.progress-timeline .progress-log::before {
+    content: "";
+
+    position: absolute;
+
+    left: -45px;
+
+    top: 28px;
+
+    width: 13px;
+
+    height: 13px;
+
+    background: #007bff;
+
+    border: 4px solid #f4f6f8;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 2px #007bff;
+}
+
+.progress-timeline .progress-log h3 {
+    margin:
+        5px 0 10px;
+
+    font-size: 21px;
+}
+
+.progress-timeline .progress-log p {
+    margin: 0;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   DATA RECORDING
+   ========================================================= */
+
+#total-distance,
+#current-speed,
+#current-position,
+#log-connection {
+    font-size: 28px;
+
+    margin: 0;
+
+    color: #17202a;
+}
+
+#log-connection {
+    color: #007bff;
 }
 
 
@@ -946,6 +1329,9 @@ button {
 
 #overview {
     text-align: center;
+
+    padding:
+        20px 0;
 }
 
 #overview h2 {
@@ -954,11 +1340,13 @@ button {
 
 #overview ul {
     list-style: none;
+
     padding: 0;
 }
 
 #overview ul li {
     font-size: 17px;
+
     margin: 7px 0;
 }
 
@@ -989,13 +1377,27 @@ footer p {
 
 
 /* =========================================================
-   RESPONSIVE DESIGN
+   FOCUS / ACCESSIBILITY
+   ========================================================= */
+
+button:focus-visible,
+a:focus-visible {
+    outline:
+        3px solid #ffc107;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   TABLET
    ========================================================= */
 
 @media (max-width: 1000px) {
 
     .header-container {
         flex-direction: column;
+
         text-align: center;
     }
 
@@ -1005,7 +1407,8 @@ footer p {
 
     .feature-grid,
     .interface-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .workflow {
@@ -1023,13 +1426,38 @@ footer p {
     .operation-layout {
         grid-template-columns: 1fr;
     }
+
+    .operation-locations {
+        margin-top: 10px;
+    }
+
+    .cta-section {
+        margin-left: 20px;
+
+        margin-right: 20px;
+    }
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 700px) {
 
     .site-header {
         padding: 15px;
+    }
+
+
+    /* Header */
+
+    .header-container {
+        gap: 15px;
+    }
+
+    .logo h1 {
+        font-size: 22px;
     }
 
     .main-nav {
@@ -1046,12 +1474,16 @@ footer p {
         font-size: 13px;
     }
 
+
+    /* Hero */
+
     .hero {
         min-height: 450px;
     }
 
     .hero-content {
-        padding: 60px 20px;
+        padding:
+            60px 20px;
     }
 
     .hero h2 {
@@ -1066,22 +1498,43 @@ footer p {
         flex-direction: column;
     }
 
-    .hero-buttons button {
+    .hero-buttons button,
+    .hero-buttons a {
         width: 100%;
+
+        text-align: center;
     }
 
+
+    /* Content */
+
     .content-section {
-        padding: 50px 18px;
+        padding:
+            50px 18px;
+    }
+
+    .section-heading {
+        gap: 10px;
     }
 
     .section-heading h2 {
         font-size: 26px;
     }
 
+    .section-intro {
+        font-size: 17px;
+    }
+
+
+    /* Cards */
+
     .feature-grid,
     .interface-grid {
         grid-template-columns: 1fr;
     }
+
+
+    /* Workflow */
 
     .workflow {
         flex-direction: column;
@@ -1091,39 +1544,80 @@ footer p {
         width: 100%;
     }
 
+
+    /* Operation */
+
+    .operation-layout {
+        grid-template-columns: 1fr;
+    }
+
     .operation-locations {
         flex-direction: column;
     }
 
     .location-arrow {
-        transform: rotate(90deg);
+        transform:
+            rotate(90deg);
     }
 
-    .cta-section {
-        margin: 20px 15px 50px;
+    .location-card {
+        width: 100%;
 
-        padding: 30px 25px;
+        min-width: 0;
+    }
+
+
+    /* CTA */
+
+    .cta-section {
+        margin:
+            20px 15px 50px;
+
+        padding:
+            30px 25px;
 
         flex-direction: column;
 
         align-items: flex-start;
     }
 
-    .cta-section button {
+    .cta-section button,
+    .cta-section a {
         width: 100%;
+
+        text-align: center;
     }
+
+
+    /* Tracking */
+
+    .tracking-info {
+        margin:
+            15px;
+
+        padding:
+            18px;
+    }
+
+
+    /* Map */
 
     .map-holder {
         width: 95%;
+
         height: 500px;
     }
+
+
+    /* Dropdown */
 
     .dropdown {
         display: block;
 
         width: 90%;
 
-        margin: 8px auto;
+        margin:
+            8px auto;
     }
 
     .dropdown button {
@@ -1133,6 +1627,34 @@ footer p {
     .dropdown-content {
         width: 100%;
     }
+
+
+    /* Charts */
+
+    .chart-container {
+        height: 320px;
+
+        padding: 5px;
+    }
+
+
+    /* Timeline */
+
+    .progress-timeline::before {
+        left: 10px;
+    }
+
+    .progress-timeline .progress-log {
+        margin-left: 35px;
+
+        padding:
+            22px;
+    }
+
+    .progress-timeline .progress-log::before {
+        left: -32px;
+    }
+
 }
 
 
@@ -1143,28 +1665,69 @@ footer p {
 @media (max-width: 450px) {
 
     .logo h1 {
-        font-size: 21px;
+        font-size: 20px;
     }
+
+    .logo span {
+        font-size: 11px;
+    }
+
+    .main-nav a {
+        padding:
+            7px 8px;
+
+        font-size: 12px;
+    }
+
 
     .hero h2 {
         font-size: 36px;
     }
 
-    .section-heading {
-        gap: 10px;
+    .hero p {
+        font-size: 15px;
     }
+
 
     .section-heading h2 {
         font-size: 23px;
     }
 
+
+    .feature-card {
+        padding: 22px;
+    }
+
+
+    .workflow-step {
+        padding:
+            22px 15px;
+    }
+
+
     .block {
         width: 150px;
+
         height: 100px;
     }
 
     .map-container {
         width: 1200px;
+
         height: 800px;
     }
+
+
+    .chart-container {
+        height: 280px;
+    }
+
+
+    #total-distance,
+    #current-speed,
+    #current-position,
+    #log-connection {
+        font-size: 23px;
+    }
+
 }
