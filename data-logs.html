@@ -1,464 +1,1189 @@
-```css
-/* =========================================================
-   DATA LOGS
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="en">
 
-.chart-container {
-    width: 100%;
-    max-width: 1000px;
-    height: 400px;
+<head>
 
-    margin: 25px auto;
+    <meta charset="UTF-8">
 
-    background: white;
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    border-radius: 10px;
+    <meta
+        name="description"
+        content="Performance monitoring and data logs for the AMR Warehouse Robot.">
 
-    box-shadow:
-        0 3px 12px rgba(0, 0, 0, 0.08);
+    <title>AMR Robot - Data Logs</title>
 
-    padding: 10px;
+    <link rel="stylesheet" href="style.css">
 
-    box-sizing: border-box;
-}
+    <!-- Google Charts -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
+    <!-- Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
-/* Data recording section */
+</head>
 
-.progress-log p {
-    margin: 12px 0;
 
-    font-size: 16px;
+<body>
 
-    color: #495057;
-}
 
-.progress-log p strong {
-    color: #212529;
-}
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
+    <header class="site-header">
 
-/* Navigation active state */
+        <div class="header-container">
 
-.main-nav a.active {
-    background: rgba(255, 255, 255, 0.2);
-}
+            <div class="logo">
 
+                <h1>
+                    AMR Warehouse Robot
+                </h1>
 
-/* Operation layout */
+                <span>
+                    Autonomous Mobile Robot System
+                </span>
 
-.operation-layout {
-    max-width: 1000px;
+            </div>
 
-    margin: 30px auto;
 
-    display: flex;
+            <nav
+                class="main-nav"
+                aria-label="Main navigation">
 
-    gap: 40px;
+                <a href="index.html">
+                    Home
+                </a>
 
-    align-items: center;
+                <a href="live-tracking.html">
+                    Live Tracking
+                </a>
 
-    justify-content: space-between;
-}
+                <a href="progress.html">
+                    Progress Updates
+                </a>
 
-.operation-text {
-    flex: 1;
+                <a
+                    href="data-logs.html"
+                    class="active">
 
-    text-align: left;
-}
+                    Data Logs
 
-.operation-text h3 {
-    margin-top: 0;
+                </a>
 
-    color: #17202a;
-}
+            </nav>
 
-.operation-locations {
-    flex: 1;
+        </div>
 
-    display: flex;
+    </header>
 
-    align-items: center;
 
-    justify-content: center;
 
-    gap: 15px;
-}
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
+    <main>
 
-/* Location cards */
 
-.location-card {
-    min-width: 150px;
+        <!-- =================================================
+             INTRO
+             ================================================= -->
 
-    padding: 20px;
+        <section class="content-section">
 
-    border-radius: 10px;
+            <div class="section-heading">
 
-    border: 2px solid #222;
+                <span>
+                    01
+                </span>
 
-    text-align: center;
+                <h2>
+                    Robot Data Logs
+                </h2>
 
-    background: white;
+            </div>
 
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.08);
-}
 
-.location-card span {
-    display: block;
+            <p class="section-intro">
 
-    font-size: 11px;
+                Monitor movement performance, speed, task execution
+                and navigation data received from the AMR.
 
-    font-weight: bold;
+            </p>
 
-    letter-spacing: 1px;
+        </section>
 
-    margin-bottom: 8px;
-}
 
-.location-card strong {
-    display: block;
 
-    font-size: 20px;
-}
+        <!-- =================================================
+             LIVE SUMMARY
+             ================================================= -->
 
-.location-card small {
-    display: block;
+        <section class="content-section">
 
-    margin-top: 6px;
+            <div class="section-heading">
 
-    color: #666;
-}
+                <span>
+                    02
+                </span>
 
-.location-card.raw-load {
-    border-color: red;
-}
+                <h2>
+                    Live Performance
+                </h2>
 
-.location-card.destination {
-    border-color: #007bff;
-}
+            </div>
 
-.location-arrow {
-    font-size: 28px;
 
-    font-weight: bold;
-}
+            <div class="feature-grid">
 
 
-/* Workflow */
+                <article class="feature-card">
 
-.workflow {
-    max-width: 1100px;
+                    <div class="feature-number">
+                        DISTANCE
+                    </div>
 
-    margin: 30px auto;
+                    <h3 id="total-distance">
+                        0 cm
+                    </h3>
 
-    display: flex;
+                    <p>
+                        Total recorded movement distance.
+                    </p>
 
-    align-items: stretch;
+                </article>
 
-    justify-content: center;
 
-    gap: 10px;
 
-    flex-wrap: wrap;
-}
+                <article class="feature-card">
 
-.workflow-step {
-    flex: 1;
+                    <div class="feature-number">
+                        SPEED
+                    </div>
 
-    min-width: 150px;
+                    <h3 id="current-speed">
+                        0 cm/s
+                    </h3>
 
-    padding: 20px;
+                    <p>
+                        Current robot speed received from ESP32.
+                    </p>
 
-    background: white;
+                </article>
 
-    border-radius: 10px;
 
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.08);
-}
 
-.step-number {
-    width: 35px;
-    height: 35px;
+                <article class="feature-card">
 
-    margin: 0 auto 12px;
+                    <div class="feature-number">
+                        POSITION
+                    </div>
 
-    border-radius: 50%;
+                    <h3 id="current-position">
+                        X: 20, Y: 16
+                    </h3>
 
-    background: #007bff;
+                    <p>
+                        Latest robot grid position.
+                    </p>
 
-    color: white;
+                </article>
 
-    display: flex;
 
-    align-items: center;
 
-    justify-content: center;
+                <article class="feature-card">
 
-    font-weight: bold;
-}
+                    <div class="feature-number">
+                        CONNECTION
+                    </div>
 
-.workflow-step h3 {
-    font-size: 17px;
-}
+                    <h3 id="log-connection">
+                        Connecting...
+                    </h3>
 
-.workflow-step p {
-    font-size: 14px;
+                    <p>
+                        WebSocket communication status.
+                    </p>
 
-    color: #666;
-}
+                </article>
 
-.workflow-arrow {
-    display: flex;
+            </div>
 
-    align-items: center;
+        </section>
 
-    font-size: 25px;
 
-    font-weight: bold;
-}
 
+        <!-- =================================================
+             PERFORMANCE CHARTS
+             ================================================= -->
 
-/* CTA */
+        <section class="content-section">
 
-.cta-section {
-    max-width: 1100px;
+            <div class="section-heading">
 
-    margin: 50px auto;
+                <span>
+                    03
+                </span>
 
-    padding: 35px;
+                <h2>
+                    Performance Charts
+                </h2>
 
-    background: #17202a;
+            </div>
 
-    color: white;
 
-    border-radius: 12px;
+            <div
+                id="distance_chart_div"
+                class="chart-container">
+            </div>
 
-    display: flex;
 
-    justify-content: space-between;
+            <div
+                id="speed_chart_div"
+                class="chart-container">
+            </div>
 
-    align-items: center;
 
-    gap: 30px;
+            <div
+                id="task_completion_chart_div"
+                class="chart-container">
+            </div>
 
-    box-sizing: border-box;
-}
 
-.cta-section h2 {
-    margin: 8px 0;
-}
+            <div
+                id="navigation_path_chart_div"
+                class="chart-container">
+            </div>
 
-.cta-section p {
-    max-width: 700px;
+        </section>
 
-    line-height: 1.6;
-}
 
-.hero-label {
-    font-size: 12px;
 
-    font-weight: bold;
+        <!-- =================================================
+             DATA RECORDING
+             ================================================= -->
 
-    letter-spacing: 2px;
-}
+        <section class="content-section">
 
+            <div class="section-heading">
 
-/* Primary button */
+                <span>
+                    04
+                </span>
 
-.primary-btn {
-    padding: 12px 20px;
+                <h2>
+                    Data Recording
+                </h2>
 
-    font-size: 16px;
+            </div>
 
-    background: #007bff;
 
-    color: white;
+            <div class="progress-log">
 
-    font-weight: bold;
+                <h3>
+                    Recorded Samples
+                </h3>
 
-    border: none;
 
-    border-radius: 5px;
+                <p>
+                    <strong>Distance Samples:</strong>
+                    <span id="distance-samples">
+                        0
+                    </span>
+                </p>
 
-    cursor: pointer;
 
-    transition: 0.3s;
-}
+                <p>
+                    <strong>Speed Samples:</strong>
+                    <span id="speed-samples">
+                        0
+                    </span>
+                </p>
 
-.primary-btn:hover {
-    background: #0056b3;
-}
 
+                <p>
+                    <strong>Position Samples:</strong>
+                    <span id="position-samples">
+                        0
+                    </span>
+                </p>
 
-/* Header */
 
-.site-header {
-    background:
-        linear-gradient(
-            90deg,
-            #047af8,
-            #0350a2
+                <p>
+                    <strong>Completed Tasks:</strong>
+                    <span id="completed-tasks">
+                        0
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Last Update:</strong>
+                    <span id="last-update">
+                        Waiting for ESP32...
+                    </span>
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             EXPORT CONTROLS
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="section-heading">
+
+                <span>
+                    05
+                </span>
+
+                <h2>
+                    Data Export
+                </h2>
+
+            </div>
+
+
+            <p>
+                Export the recorded robot data for further
+                analysis and reporting.
+            </p>
+
+
+            <button
+                type="button"
+                class="primary-btn"
+                onclick="exportToExcel()">
+
+                Download All Data (Excel)
+
+            </button>
+
+
+            <button
+                type="button"
+                class="reset-btn"
+                onclick="clearLogs()">
+
+                Clear Logs
+
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div>
+
+                <span class="hero-label">
+                    DATA MONITORING
+                </span>
+
+                <h2>
+                    AMR Performance Analysis
+                </h2>
+
+                <p>
+                    Recorded distance, speed, task execution and
+                    navigation coordinates can be used to evaluate
+                    robot movement and navigation performance.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="primary-btn"
+                onclick="location.href='live-tracking.html'">
+
+                Open Live Tracking
+
+            </button>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 AMR Warehouse Robot
+        </p>
+
+        <p>
+            Autonomous Mobile Robot • Warehouse Navigation •
+            Performance Monitoring
+        </p>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         DATA LOGGING JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        google.charts.load(
+            "current",
+            {
+                packages: ["corechart"]
+            }
         );
 
-    color: white;
-
-    padding: 18px 20px;
-}
-
-.header-container {
-    max-width: 1200px;
-
-    margin: auto;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 30px;
-}
-
-.logo {
-    text-align: left;
-}
-
-.logo h1 {
-    margin: 0;
-
-    font-size: 24px;
-}
-
-.logo span {
-    font-size: 12px;
-
-    opacity: 0.85;
-}
-
-.main-nav {
-    display: flex;
-
-    align-items: center;
-
-    gap: 5px;
-}
-
-.main-nav a {
-    color: white;
-
-    text-decoration: none;
-
-    padding: 10px 14px;
-
-    border-radius: 5px;
-
-    transition: 0.3s;
-}
-
-.main-nav a:hover,
-.main-nav a.active {
-    background:
-        rgba(255, 255, 255, 0.2);
-}
+        google.charts.setOnLoadCallback(
+            initializeCharts
+        );
 
 
-/* Content */
+        /* =================================================
+           DATA STORAGE
+           ================================================= */
 
-.content-section {
-    max-width: 1100px;
+        let distanceData = [
+            ["Time", "Distance"]
+        ];
 
-    margin: 0 auto;
+        let speedData = [
+            ["Time", "Speed"]
+        ];
 
-    padding: 35px 20px;
-}
+        let taskCompletionData = [
+            ["Task", "Time"]
+        ];
 
-.section-heading {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    margin-bottom: 15px;
-}
-
-.section-heading span {
-    font-size: 12px;
-
-    font-weight: bold;
-
-    color: #007bff;
-
-    letter-spacing: 1px;
-}
-
-.section-heading h2 {
-    margin: 0;
-}
-
-.section-intro {
-    max-width: 800px;
-
-    margin: auto;
-
-    line-height: 1.7;
-
-    color: #5f6b76;
-}
+        let navPathData = [
+            ["X", "Y"]
+        ];
 
 
-/* Mobile */
+        let totalDistance = 0;
 
-@media (max-width: 768px) {
+        let taskCounter = 0;
 
-    .header-container {
-        flex-direction: column;
-    }
+        let startTime = Date.now();
 
-    .logo {
-        text-align: center;
-    }
 
-    .main-nav {
-        flex-direction: column;
+        /* =================================================
+           WEBSOCKET
+           ================================================= */
 
-        width: 100%;
-    }
+        let socket;
 
-    .main-nav a {
-        width: 100%;
 
-        box-sizing: border-box;
-    }
+        function connectWebSocket() {
 
-    .operation-layout {
-        flex-direction: column;
-    }
+            try {
 
-    .operation-locations {
-        width: 100%;
-    }
+                socket = new WebSocket(
+                    "ws://192.168.4.1:81/"
+                );
 
-    .workflow-arrow {
-        display: none;
-    }
 
-    .cta-section {
-        flex-direction: column;
+                socket.onopen = function () {
 
-        text-align: center;
-    }
+                    console.log(
+                        "ESP32 WebSocket connected"
+                    );
 
-    .chart-container {
-        height: 320px;
+                    updateConnection(
+                        "Connected"
+                    );
 
-        padding: 5px;
-    }
+                };
 
-}
-```
+
+                socket.onclose = function () {
+
+                    console.log(
+                        "ESP32 WebSocket disconnected"
+                    );
+
+                    updateConnection(
+                        "Disconnected"
+                    );
+
+                };
+
+
+                socket.onerror = function (error) {
+
+                    console.log(
+                        "WebSocket error:",
+                        error
+                    );
+
+                    updateConnection(
+                        "Connection Error"
+                    );
+
+                };
+
+
+                socket.onmessage = function (event) {
+
+                    try {
+
+                        const data =
+                            JSON.parse(event.data);
+
+                        processRobotData(data);
+
+                    }
+
+                    catch (error) {
+
+                        console.log(
+                            "Invalid ESP32 data:",
+                            event.data
+                        );
+
+                    }
+
+                };
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    "WebSocket unavailable:",
+                    error
+                );
+
+                updateConnection(
+                    "Unavailable"
+                );
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           PROCESS ROBOT DATA
+           ================================================= */
+
+        function processRobotData(data) {
+
+            const now = new Date();
+
+            const elapsedSeconds =
+                Number(
+                    (
+                        (Date.now() - startTime)
+                        / 1000
+                    ).toFixed(1)
+                );
+
+
+            /* ---------------------------------------------
+               DISTANCE
+               --------------------------------------------- */
+
+            if (
+                data.distance !== undefined &&
+                !isNaN(data.distance)
+            ) {
+
+                const distance =
+                    Number(data.distance);
+
+                distanceData.push([
+                    elapsedSeconds,
+                    distance
+                ]);
+
+                totalDistance = distance;
+
+                document.getElementById(
+                    "total-distance"
+                ).innerText =
+                    distance.toFixed(2) + " cm";
+
+                document.getElementById(
+                    "distance-samples"
+                ).innerText =
+                    distanceData.length - 1;
+
+            }
+
+
+            /* ---------------------------------------------
+               SPEED
+               --------------------------------------------- */
+
+            if (
+                data.speed !== undefined &&
+                !isNaN(data.speed)
+            ) {
+
+                const speed =
+                    Number(data.speed);
+
+                speedData.push([
+                    elapsedSeconds,
+                    speed
+                ]);
+
+                document.getElementById(
+                    "current-speed"
+                ).innerText =
+                    speed.toFixed(2) + " cm/s";
+
+                document.getElementById(
+                    "speed-samples"
+                ).innerText =
+                    speedData.length - 1;
+
+            }
+
+
+            /* ---------------------------------------------
+               POSITION
+               --------------------------------------------- */
+
+            if (data.position) {
+
+                const x =
+                    Number(data.position.x);
+
+                const y =
+                    Number(data.position.y);
+
+
+                navPathData.push([
+                    x,
+                    y
+                ]);
+
+
+                document.getElementById(
+                    "current-position"
+                ).innerText =
+                    `X: ${x}, Y: ${y}`;
+
+
+                document.getElementById(
+                    "position-samples"
+                ).innerText =
+                    navPathData.length - 1;
+
+            }
+
+
+            /* ---------------------------------------------
+               TASK COMPLETION
+               --------------------------------------------- */
+
+            if (
+                data.task_time !== undefined &&
+                !isNaN(data.task_time)
+            ) {
+
+                taskCounter++;
+
+
+                taskCompletionData.push([
+                    `Task ${taskCounter}`,
+                    Number(data.task_time)
+                ]);
+
+
+                document.getElementById(
+                    "completed-tasks"
+                ).innerText =
+                    taskCounter;
+
+            }
+
+
+            /* ---------------------------------------------
+               LAST UPDATE
+               --------------------------------------------- */
+
+            document.getElementById(
+                "last-update"
+            ).innerText =
+                now.toLocaleTimeString();
+
+
+            drawAllCharts();
+
+        }
+
+
+
+        /* =================================================
+           CONNECTION STATUS
+           ================================================= */
+
+        function updateConnection(status) {
+
+            const element =
+                document.getElementById(
+                    "log-connection"
+                );
+
+            element.innerText = status;
+
+        }
+
+
+
+        /* =================================================
+           CHARTS
+           ================================================= */
+
+        function initializeCharts() {
+
+            connectWebSocket();
+
+            drawAllCharts();
+
+        }
+
+
+
+        function drawAllCharts() {
+
+            if (
+                typeof google === "undefined" ||
+                !google.visualization
+            ) {
+                return;
+            }
+
+
+            /* ---------------------------------------------
+               DISTANCE
+               --------------------------------------------- */
+
+            const distanceChart =
+                new google.visualization.LineChart(
+                    document.getElementById(
+                        "distance_chart_div"
+                    )
+                );
+
+
+            distanceChart.draw(
+
+                google.visualization
+                    .arrayToDataTable(
+                        distanceData
+                    ),
+
+                {
+
+                    title:
+                        "Distance Covered",
+
+                    hAxis:
+                    {
+                        title:
+                            "Time (s)"
+                    },
+
+                    vAxis:
+                    {
+                        title:
+                            "Distance (cm)"
+                    },
+
+                    legend:
+                    {
+                        position:
+                            "bottom"
+                    },
+
+                    pointSize:
+                        4,
+
+                    chartArea:
+                    {
+                        left: 70,
+                        right: 30,
+                        top: 60,
+                        bottom: 60
+                    }
+
+                }
+
+            );
+
+
+
+            /* ---------------------------------------------
+               SPEED
+               --------------------------------------------- */
+
+            const speedChart =
+                new google.visualization.LineChart(
+                    document.getElementById(
+                        "speed_chart_div"
+                    )
+                );
+
+
+            speedChart.draw(
+
+                google.visualization
+                    .arrayToDataTable(
+                        speedData
+                    ),
+
+                {
+
+                    title:
+                        "Speed Over Time",
+
+                    hAxis:
+                    {
+                        title:
+                            "Time (s)"
+                    },
+
+                    vAxis:
+                    {
+                        title:
+                            "Speed (cm/s)"
+                    },
+
+                    legend:
+                    {
+                        position:
+                            "bottom"
+                    },
+
+                    pointSize:
+                        4,
+
+                    chartArea:
+                    {
+                        left: 70,
+                        right: 30,
+                        top: 60,
+                        bottom: 60
+                    }
+
+                }
+
+            );
+
+
+
+            /* ---------------------------------------------
+               TASK TIME
+               --------------------------------------------- */
+
+            const taskChart =
+                new google.visualization.ColumnChart(
+                    document.getElementById(
+                        "task_completion_chart_div"
+                    )
+                );
+
+
+            taskChart.draw(
+
+                google.visualization
+                    .arrayToDataTable(
+                        taskCompletionData
+                    ),
+
+                {
+
+                    title:
+                        "Task Completion Time",
+
+                    hAxis:
+                    {
+                        title:
+                            "Task"
+                    },
+
+                    vAxis:
+                    {
+                        title:
+                            "Time (s)"
+                    },
+
+                    legend:
+                    {
+                        position:
+                            "none"
+                    },
+
+                    chartArea:
+                    {
+                        left: 70,
+                        right: 30,
+                        top: 60,
+                        bottom: 60
+                    }
+
+                }
+
+            );
+
+
+
+            /* ---------------------------------------------
+               NAVIGATION PATH
+               --------------------------------------------- */
+
+            const pathChart =
+                new google.visualization.ScatterChart(
+                    document.getElementById(
+                        "navigation_path_chart_div"
+                    )
+                );
+
+
+            pathChart.draw(
+
+                google.visualization
+                    .arrayToDataTable(
+                        navPathData
+                    ),
+
+                {
+
+                    title:
+                        "Robot Navigation Path",
+
+                    hAxis:
+                    {
+                        title:
+                            "X Coordinate"
+                    },
+
+                    vAxis:
+                    {
+                        title:
+                            "Y Coordinate"
+                    },
+
+                    legend:
+                    {
+                        position:
+                            "none"
+                    },
+
+                    pointSize:
+                        5,
+
+                    chartArea:
+                    {
+                        left: 70,
+                        right: 30,
+                        top: 60,
+                        bottom: 60
+                    }
+
+                }
+
+            );
+
+        }
+
+
+
+        /* =================================================
+           EXCEL EXPORT
+           ================================================= */
+
+        function exportToExcel() {
+
+            const workbook =
+                XLSX.utils.book_new();
+
+
+            const distanceSheet =
+                XLSX.utils.aoa_to_sheet(
+                    distanceData
+                );
+
+
+            const speedSheet =
+                XLSX.utils.aoa_to_sheet(
+                    speedData
+                );
+
+
+            const taskSheet =
+                XLSX.utils.aoa_to_sheet(
+                    taskCompletionData
+                );
+
+
+            const pathSheet =
+                XLSX.utils.aoa_to_sheet(
+                    navPathData
+                );
+
+
+            XLSX.utils.book_append_sheet(
+                workbook,
+                distanceSheet,
+                "Distance"
+            );
+
+
+            XLSX.utils.book_append_sheet(
+                workbook,
+                speedSheet,
+                "Speed"
+            );
+
+
+            XLSX.utils.book_append_sheet(
+                workbook,
+                taskSheet,
+                "Tasks"
+            );
+
+
+            XLSX.utils.book_append_sheet(
+                workbook,
+                pathSheet,
+                "Navigation Path"
+            );
+
+
+            XLSX.writeFile(
+                workbook,
+                "AMR_Robot_Data.xlsx"
+            );
+
+        }
+
+
+
+        /* =================================================
+           CLEAR LOGS
+           ================================================= */
+
+        function clearLogs() {
+
+            if (
+                !confirm(
+                    "Clear all recorded robot data?"
+                )
+            ) {
+                return;
+            }
+
+
+            distanceData = [
+                ["Time", "Distance"]
+            ];
+
+            speedData = [
+                ["Time", "Speed"]
+            ];
+
+            taskCompletionData = [
+                ["Task", "Time"]
+            ];
+
+            navPathData = [
+                ["X", "Y"]
+            ];
+
+
+            totalDistance = 0;
+
+            taskCounter = 0;
+
+            startTime = Date.now();
+
+
+            document.getElementById(
+                "total-distance"
+            ).innerText =
+                "0 cm";
+
+
+            document.getElementById(
+                "current-speed"
+            ).innerText =
+                "0 cm/s";
+
+
+            document.getElementById(
+                "current-position"
+            ).innerText =
+                "X: 20, Y: 16";
+
+
+            document.getElementById(
+                "distance-samples"
+            ).innerText =
+                "0";
+
+
+            document.getElementById(
+                "speed-samples"
+            ).innerText =
+                "0";
+
+
+            document.getElementById(
+                "position-samples"
+            ).innerText =
+                "0";
+
+
+            document.getElementById(
+                "completed-tasks"
+            ).innerText =
+                "0";
+
+
+            drawAllCharts();
+
+        }
+
+
+
+        /* =================================================
+           PERIODIC REDRAW
+           ================================================= */
+
+        setInterval(
+            drawAllCharts,
+            5000
+        );
+
+    </script>
+
+
+</body>
+
+</html>
