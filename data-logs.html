@@ -1,126 +1,464 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Robot Data Logs</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://www.gstatic.com/charts/loader.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-</head>
-<body>
-  <header>
-    <h1>Robot Data Logs</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="live-tracking.html">Live Tracking</a>
-      <a href="progress.html">Progress Updates</a>
-    </nav>
-  </header>
+```css
+/* =========================================================
+   DATA LOGS
+   ========================================================= */
 
-  <main>
-    <h2>Performance Charts</h2>
-    <div id="distance_chart_div" style="width:100%; height:400px;"></div>
-    <div id="speed_chart_div" style="width:100%; height:400px;"></div>
-    <div id="task_completion_chart_div" style="width:100%; height:400px;"></div>
-    <div id="navigation_path_chart_div" style="width:100%; height:400px;"></div>
-    <button onclick="exportToExcel()">Download All Data (Excel)</button>
-  </main>
+.chart-container {
+    width: 100%;
+    max-width: 1000px;
+    height: 400px;
 
-  <script>
-    google.charts.load("current", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(drawAllCharts);
+    margin: 25px auto;
 
-    let distanceData = [['Time', 'Distance'], [0, 0]];
-    let speedData = [['Time', 'Speed'], [0, 0]];
-    let taskCompletionData = [['Task', 'Time'], ['Task 1', 0]];
-    let navPathData = [['X', 'Y'], [0, 0]];
+    background: white;
 
-    let socket;
-    try {
-      socket = new WebSocket("ws://192.168.4.1:81/");
-      socket.onopen = () => console.log("Connected to ESP32 WebSocket");
+    border-radius: 10px;
 
-      socket.onmessage = (event) => {
-        let data = JSON.parse(event.data);
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.08);
 
-        const now = new Date();
-        const seconds = now.getSeconds() + now.getMinutes() * 60;
+    padding: 10px;
 
-        if (data.distance !== undefined) {
-          distanceData.push([seconds, data.distance]);
-          if (distanceData.length > 20) distanceData.splice(1, 1);
-        }
+    box-sizing: border-box;
+}
 
-        if (data.speed !== undefined) {
-          speedData.push([seconds, data.speed]);
-          if (speedData.length > 20) speedData.splice(1, 1);
-        }
 
-        if (data.task_time !== undefined) {
-          taskCompletionData.push([`Task ${taskCompletionData.length}`, data.task_time]);
-          if (taskCompletionData.length > 20) taskCompletionData.splice(1, 1);
-        }
+/* Data recording section */
 
-        if (data.position) {
-          navPathData.push([data.position.x, data.position.y]);
-          if (navPathData.length > 20) navPathData.splice(1, 1);
-        }
+.progress-log p {
+    margin: 12px 0;
 
-        drawAllCharts();
-      };
-    } catch (e) {
-      console.log("WebSocket not available. Showing default data.");
+    font-size: 16px;
+
+    color: #495057;
+}
+
+.progress-log p strong {
+    color: #212529;
+}
+
+
+/* Navigation active state */
+
+.main-nav a.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* Operation layout */
+
+.operation-layout {
+    max-width: 1000px;
+
+    margin: 30px auto;
+
+    display: flex;
+
+    gap: 40px;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.operation-text {
+    flex: 1;
+
+    text-align: left;
+}
+
+.operation-text h3 {
+    margin-top: 0;
+
+    color: #17202a;
+}
+
+.operation-locations {
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+}
+
+
+/* Location cards */
+
+.location-card {
+    min-width: 150px;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    border: 2px solid #222;
+
+    text-align: center;
+
+    background: white;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.location-card span {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 8px;
+}
+
+.location-card strong {
+    display: block;
+
+    font-size: 20px;
+}
+
+.location-card small {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #666;
+}
+
+.location-card.raw-load {
+    border-color: red;
+}
+
+.location-card.destination {
+    border-color: #007bff;
+}
+
+.location-arrow {
+    font-size: 28px;
+
+    font-weight: bold;
+}
+
+
+/* Workflow */
+
+.workflow {
+    max-width: 1100px;
+
+    margin: 30px auto;
+
+    display: flex;
+
+    align-items: stretch;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.workflow-step {
+    flex: 1;
+
+    min-width: 150px;
+
+    padding: 20px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.step-number {
+    width: 35px;
+    height: 35px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: #007bff;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+.workflow-step h3 {
+    font-size: 17px;
+}
+
+.workflow-step p {
+    font-size: 14px;
+
+    color: #666;
+}
+
+.workflow-arrow {
+    display: flex;
+
+    align-items: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
+}
+
+
+/* CTA */
+
+.cta-section {
+    max-width: 1100px;
+
+    margin: 50px auto;
+
+    padding: 35px;
+
+    background: #17202a;
+
+    color: white;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+    box-sizing: border-box;
+}
+
+.cta-section h2 {
+    margin: 8px 0;
+}
+
+.cta-section p {
+    max-width: 700px;
+
+    line-height: 1.6;
+}
+
+.hero-label {
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+/* Primary button */
+
+.primary-btn {
+    padding: 12px 20px;
+
+    font-size: 16px;
+
+    background: #007bff;
+
+    color: white;
+
+    font-weight: bold;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    background: #0056b3;
+}
+
+
+/* Header */
+
+.site-header {
+    background:
+        linear-gradient(
+            90deg,
+            #047af8,
+            #0350a2
+        );
+
+    color: white;
+
+    padding: 18px 20px;
+}
+
+.header-container {
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+.logo {
+    text-align: left;
+}
+
+.logo h1 {
+    margin: 0;
+
+    font-size: 24px;
+}
+
+.logo span {
+    font-size: 12px;
+
+    opacity: 0.85;
+}
+
+.main-nav {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.main-nav a {
+    color: white;
+
+    text-decoration: none;
+
+    padding: 10px 14px;
+
+    border-radius: 5px;
+
+    transition: 0.3s;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    background:
+        rgba(255, 255, 255, 0.2);
+}
+
+
+/* Content */
+
+.content-section {
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 35px 20px;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+}
+
+.section-heading span {
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #007bff;
+
+    letter-spacing: 1px;
+}
+
+.section-heading h2 {
+    margin: 0;
+}
+
+.section-intro {
+    max-width: 800px;
+
+    margin: auto;
+
+    line-height: 1.7;
+
+    color: #5f6b76;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .header-container {
+        flex-direction: column;
     }
 
-    function drawAllCharts() {
-      const distanceChart = new google.visualization.LineChart(document.getElementById("distance_chart_div"));
-      distanceChart.draw(google.visualization.arrayToDataTable(distanceData), {
-        title: "Distance Covered",
-        hAxis: { title: "Time (s)" },
-        vAxis: { title: "Distance (cm)" }
-      });
-
-      const speedChart = new google.visualization.LineChart(document.getElementById("speed_chart_div"));
-      speedChart.draw(google.visualization.arrayToDataTable(speedData), {
-        title: "Speed Over Time",
-        hAxis: { title: "Time (s)" },
-        vAxis: { title: "Speed (cm/s)" }
-      });
-
-      const taskChart = new google.visualization.ColumnChart(document.getElementById("task_completion_chart_div"));
-      taskChart.draw(google.visualization.arrayToDataTable(taskCompletionData), {
-        title: "Task Completion Time",
-        hAxis: { title: "Task" },
-        vAxis: { title: "Time (s)" }
-      });
-
-      const pathChart = new google.visualization.ScatterChart(document.getElementById("navigation_path_chart_div"));
-      pathChart.draw(google.visualization.arrayToDataTable(navPathData), {
-        title: "Navigation Path",
-        hAxis: { title: "X" },
-        vAxis: { title: "Y" }
-      });
+    .logo {
+        text-align: center;
     }
 
-    function exportToExcel() {
-      const wb = XLSX.utils.book_new();
+    .main-nav {
+        flex-direction: column;
 
-      const sheet1 = XLSX.utils.aoa_to_sheet(distanceData);
-      const sheet2 = XLSX.utils.aoa_to_sheet(speedData);
-      const sheet3 = XLSX.utils.aoa_to_sheet(taskCompletionData);
-      const sheet4 = XLSX.utils.aoa_to_sheet(navPathData);
-
-      XLSX.utils.book_append_sheet(wb, sheet1, "Distance");
-      XLSX.utils.book_append_sheet(wb, sheet2, "Speed");
-      XLSX.utils.book_append_sheet(wb, sheet3, "Tasks");
-      XLSX.utils.book_append_sheet(wb, sheet4, "Path");
-
-      XLSX.writeFile(wb, "robot_data.xlsx");
+        width: 100%;
     }
 
-    // Draw charts even if no data from ESP32
-    setInterval(drawAllCharts, 5000);
-  </script>
-</body>
-</html>
+    .main-nav a {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+    .operation-layout {
+        flex-direction: column;
+    }
+
+    .operation-locations {
+        width: 100%;
+    }
+
+    .workflow-arrow {
+        display: none;
+    }
+
+    .cta-section {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .chart-container {
+        height: 320px;
+
+        padding: 5px;
+    }
+
+}
+```
