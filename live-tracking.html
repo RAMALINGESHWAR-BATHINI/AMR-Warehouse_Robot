@@ -1,74 +1,564 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Live Tracking</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Live monitoring and navigation interface for the AMR Warehouse Robot.">
+
+    <title>AMR Robot - Live Tracking</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
+
+
 <body>
-  <header>
-    <h1>Live Tracking</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="progress.html">Progress Updates</a>
-      <a href="data-logs.html">Data Logs</a>
-    </nav>
-  </header>
 
-  <main>
-    <h2>Live Robot Tracking</h2>
-    <div class="tracking-info">
-      <p><strong>Position:</strong> <span id="position">X: 0, Y: 0</span></p>
-      <p><strong>Distance:</strong> <span id="distance">0 cm</span></p>
-      <p><strong>Status:</strong> <span id="status">Click on "Raw Load" first, then click on a destination.</span></p>
-    </div>
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-    <!-- Warehouse Navigation Map -->
-    <h2>Warehouse Navigation Map</h2>
-    <div class="map-holder">
-      <div class="map-container">
-        <canvas id="pathCanvas" width="1500" height="1000"></canvas>
-        <div class="block red-block" id="raw-load" style="left:1100px; top:100px;">Raw Load</div>
-        <div class="block yellow-block" id="un1" style="left:500px; top:250px;">UN 1</div>
-        <div class="block yellow-block" id="un2" style="left:500px; top:500px;">UN 2</div>
-        <div class="block blue-block" id="parking" style="left:1000px; top:800px;">Parking</div>
-      </div>
-    </div>
+    <header class="site-header">
 
-    <button class="reset-btn" onclick="resetPath()">Reset Path</button>
+        <div class="header-container">
 
-    <div class="zoom-controls">
-      <button onclick="zoomIn()">+</button>
-      <button onclick="zoomOut()">-</button>
-    </div>
+            <div class="logo">
+                <h1>AMR Warehouse Robot</h1>
+                <span>Autonomous Mobile Robot System</span>
+            </div>
 
-    <!-- Start Dropdown -->
-    <div class="dropdown">
-      <button>Start</button>
-      <div class="dropdown-content">
-        <a href="#" onclick="startNow()">Start Now</a>
-        <a href="#" onclick="customStart()">Start with Delay</a>
-      </div>
-    </div>
+            <nav class="main-nav" aria-label="Main navigation">
 
-    <!-- Stop Dropdown -->
-    <div class="dropdown">
-      <button>Stop</button>
-      <div class="dropdown-content">
-        <a href="#" onclick="stopNow()">Stop Now</a>
-        <a href="#" onclick="customStop()">Stop with Options</a>
-      </div>
-    </div>
+                <a href="index.html">
+                    Home
+                </a>
 
-    <!-- Path Control Dropdown -->
-    <div class="dropdown">
-      <button>Path Change</button>
-      <div class="dropdown-content">
-        <a href="#" onclick="changeDestination()">Change Destination</a>
-      </div>
-    </div>
-  </main>
+                <a href="live-tracking.html" class="active">
+                    Live Tracking
+                </a>
+
+                <a href="progress.html">
+                    Progress Updates
+                </a>
+
+                <a href="data-logs.html">
+                    Data Logs
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             PAGE INTRO
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>01</span>
+                <h2>Live Robot Tracking</h2>
+            </div>
+
+            <p class="section-intro">
+                Monitor the AMR's current position, movement distance,
+                connection status and navigation path in real time.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             ROBOT STATUS
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>02</span>
+                <h2>Robot Status</h2>
+            </div>
+
+
+            <div class="tracking-info">
+
+                <p>
+                    <strong>Connection:</strong>
+
+                    <span id="connection-status">
+                        Connecting to robot...
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Position:</strong>
+
+                    <span id="position">
+                        X: 20, Y: 16
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Direction:</strong>
+
+                    <span id="direction">
+                        Up
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Distance:</strong>
+
+                    <span id="distance">
+                        0 cm
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Task:</strong>
+
+                    <span id="task">
+                        No task selected
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>Status:</strong>
+
+                    <span id="status">
+                        Select Raw Load, then select UN 1 or UN 2.
+                    </span>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TASK SELECTION
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>03</span>
+                <h2>Warehouse Task</h2>
+            </div>
+
+
+            <div class="operation-layout">
+
+                <div class="operation-text">
+
+                    <h3>Material Transportation</h3>
+
+                    <p>
+                        Select the Raw Load area as the pickup location,
+                        then select the required unloading location.
+                    </p>
+
+                    <p>
+                        The system generates a grid-based navigation path
+                        from the robot's current position to the pickup
+                        location and then to the selected destination.
+                    </p>
+
+                </div>
+
+
+                <div class="operation-locations">
+
+                    <div class="location-card raw-load">
+
+                        <span>PICKUP</span>
+
+                        <strong>Raw Load</strong>
+
+                        <small>
+                            Material Pickup
+                        </small>
+
+                    </div>
+
+
+                    <div class="location-arrow">
+                        →
+                    </div>
+
+
+                    <div class="location-card destination">
+
+                        <span>DESTINATION</span>
+
+                        <strong id="selected-destination">
+                            UN 1 / UN 2
+                        </strong>
+
+                        <small>
+                            Material Unloading
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NAVIGATION MAP
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>04</span>
+                <h2>Warehouse Navigation Map</h2>
+            </div>
+
+
+            <p>
+                Select <strong>Raw Load</strong> first, followed by
+                <strong>UN 1</strong> or <strong>UN 2</strong>.
+            </p>
+
+
+            <div class="map-holder">
+
+                <div class="map-container">
+
+                    <!-- Navigation path -->
+                    <canvas
+                        id="pathCanvas"
+                        width="1500"
+                        height="1000">
+                    </canvas>
+
+
+                    <!-- Raw Load -->
+                    <div
+                        class="block red-block"
+                        id="raw-load"
+                        style="left:1100px; top:100px;">
+
+                        Raw Load
+
+                    </div>
+
+
+                    <!-- UN 1 -->
+                    <div
+                        class="block yellow-block"
+                        id="un1"
+                        style="left:500px; top:250px;">
+
+                        UN 1
+
+                    </div>
+
+
+                    <!-- UN 2 -->
+                    <div
+                        class="block yellow-block"
+                        id="un2"
+                        style="left:500px; top:500px;">
+
+                        UN 2
+
+                    </div>
+
+
+                    <!-- Parking -->
+                    <div
+                        class="block blue-block"
+                        id="parking"
+                        style="left:1000px; top:800px;">
+
+                        Parking
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Map controls -->
+
+            <div class="zoom-controls">
+
+                <button
+                    type="button"
+                    onclick="zoomIn()"
+                    aria-label="Zoom in">
+                    +
+                </button>
+
+                <button
+                    type="button"
+                    onclick="zoomOut()"
+                    aria-label="Zoom out">
+                    −
+                </button>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="reset-btn"
+                onclick="resetPath()">
+
+                Reset Path
+
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             ROBOT CONTROLS
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>05</span>
+                <h2>Robot Controls</h2>
+            </div>
+
+
+            <!-- Start -->
+
+            <div class="dropdown">
+
+                <button type="button">
+                    Start
+                </button>
+
+                <div class="dropdown-content">
+
+                    <a
+                        href="#"
+                        onclick="startNow(); return false;">
+
+                        Start Now
+
+                    </a>
+
+                    <a
+                        href="#"
+                        onclick="customStart(); return false;">
+
+                        Start with Delay
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Stop -->
+
+            <div class="dropdown">
+
+                <button type="button">
+                    Stop
+                </button>
+
+                <div class="dropdown-content">
+
+                    <a
+                        href="#"
+                        onclick="stopNow(); return false;">
+
+                        Stop Now
+
+                    </a>
+
+                    <a
+                        href="#"
+                        onclick="customStop(); return false;">
+
+                        Stop with Options
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Path Change -->
+
+            <div class="dropdown">
+
+                <button type="button">
+                    Path Change
+                </button>
+
+                <div class="dropdown-content">
+
+                    <a
+                        href="#"
+                        onclick="changeDestination(); return false;">
+
+                        Change Destination
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NAVIGATION INFORMATION
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="section-heading">
+                <span>06</span>
+                <h2>Navigation Information</h2>
+            </div>
+
+
+            <div class="feature-grid">
+
+                <article class="feature-card">
+
+                    <div class="feature-number">
+                        POSITION
+                    </div>
+
+                    <h3>Robot Coordinates</h3>
+
+                    <p>
+                        Displays the robot's current position on the
+                        warehouse navigation grid.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">
+                        PATH
+                    </div>
+
+                    <h3>Generated Route</h3>
+
+                    <p>
+                        The calculated route is displayed on the map
+                        before and during robot movement.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">
+                        STATUS
+                    </div>
+
+                    <h3>Live Operation</h3>
+
+                    <p>
+                        Displays connection, movement and task status
+                        received from the robot.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SYSTEM STATUS
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div>
+
+                <span class="hero-label">
+                    AMR COMMUNICATION
+                </span>
+
+                <h2>
+                    Robot Communication
+                </h2>
+
+                <p>
+                    The web interface communicates with the AMR through
+                    a WebSocket connection for navigation commands and
+                    live robot status.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="primary-btn"
+                onclick="resetPath()">
+
+                Reset Tracking
+
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 AMR Warehouse Robot
+        </p>
+
+        <p>
+            Autonomous Mobile Robot • Warehouse Navigation • Live Monitoring
+        </p>
+
+    </footer>
+
 </body>
+
 </html>
+```
